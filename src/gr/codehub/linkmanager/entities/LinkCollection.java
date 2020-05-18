@@ -3,7 +3,9 @@ package gr.codehub.linkmanager.entities;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class LinkCollection {
 
@@ -67,8 +69,10 @@ public class LinkCollection {
         try {
             PrintWriter pw = new PrintWriter(outfile);
             for (Link link : links){
-                pw.println(link.getAuthor()   +","
-                + link.getDescription() +","
+                pw.println(link.getUrl() +","
+                        + link.getDescription() +","
+                       + link.getAuthor()   +","
+
                 + link.getCreationDate()+","
                 + link.getKeywords()   );
             }
@@ -82,8 +86,25 @@ public class LinkCollection {
 
     //loadFromFile
 
-public void loadFromFile()
+public void loadFromFile(String filename)
 {
+    File outfile = new File(filename);
+    try {
+        Scanner reader = new Scanner(outfile);
+        String line;
+         while (reader.hasNext()){
+            line = reader.nextLine();
+            String []words = line.split(",");
+
+            Link link = new Link(words[0], words[1], null, new Date(), words[2], false, 0);
+            links.add(link);
+        }
+         reader.close();
+    }
+    catch(Exception e){
+
+        System.out.println("Cannot load from  file");
+    }
     
 }
 
