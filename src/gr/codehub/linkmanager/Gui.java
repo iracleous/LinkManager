@@ -22,12 +22,9 @@ public class Gui {
     }
 
 
-    public  void addInsertPanel( ActionEvent e){
-            InsertForm form = new InsertForm();
+    public  void addInsertPanel(  ){
+        InsertForm form = new InsertForm();
         JPanel panel = form.getInsertPanel();
-
-
-
         frame.setContentPane(panel);
         frame.repaint();
         frame.setVisible(true);
@@ -46,26 +43,38 @@ public class Gui {
 
     private  void createMenuBar() {
         var menuBar = new JMenuBar();
-        var fileMenu = new JMenu("File");
-        var addMenuItem = new JMenuItem("Add link" );
-        var searchMenuItem = new JMenuItem("Search link" );
-        var eMenuItem = new JMenuItem("Exit" );
+        var linkMenu = new JMenu("Links");
+        var linkInsertMenuItem = new JMenuItem("Insert link" );
+        var linkChangeMenuItem = new JMenuItem("Change link" );
 
+        var searchMenu = new JMenu("Search");
+        var searchMenuItem = new JMenuItem("Search");
 
-        eMenuItem.addActionListener((event) -> System.exit(0));
-        addMenuItem.addActionListener((event) -> addInsertPanel( event));
+        var helpMenu = new JMenu("Help");
+        var helpAboutMenuItem = new JMenuItem("About");
+        var helpExitMenuItem = new JMenuItem("Exit");
+
+        linkInsertMenuItem.addActionListener((event) -> addInsertPanel( ));
+        //    linkChangeMenuItem.
         searchMenuItem.addActionListener((event) -> addSearchPanel( ));
+       // helpAboutMenuItem
+        helpExitMenuItem.addActionListener((event) ->askToExit());
 
-        fileMenu.add(addMenuItem);
-        fileMenu.add(searchMenuItem);
-        fileMenu.add(eMenuItem);
+        linkMenu.add(linkInsertMenuItem);linkMenu.add(linkChangeMenuItem);
+        searchMenu.add(searchMenuItem);
+        helpMenu.add(helpAboutMenuItem);helpMenu.add(helpExitMenuItem);
 
-        menuBar.add(fileMenu);
+        menuBar.add(linkMenu); menuBar.add(searchMenu); menuBar.add(helpMenu);
         frame.setJMenuBar(menuBar);
     }
 
 
-
-
-
+    private void askToExit()
+    {
+         var choice = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "WARNING",
+                JOptionPane.YES_NO_OPTION);
+        if (    choice== JOptionPane.YES_OPTION) {
+            System.exit(0);
+         }
+     }
 }
