@@ -1,5 +1,6 @@
 package gr.codehub.linkmanager;
 
+import gr.codehub.linkmanager.entities.LinkCollection;
 import gr.codehub.linkmanager.forms.InsertForm;
 import gr.codehub.linkmanager.forms.SearchForm;
 
@@ -10,6 +11,9 @@ import java.awt.event.ActionEvent;
 public class Gui {
 
   private   JFrame frame = new JFrame("LinkManager");
+   private LinkCollection urlList = new LinkCollection();
+
+
 
 
     public Gui(  ){
@@ -23,7 +27,7 @@ public class Gui {
 
 
     public  void addInsertPanel(  ){
-        InsertForm form = new InsertForm();
+        InsertForm form = new InsertForm(urlList );
         JPanel panel = form.getInsertPanel();
         frame.setContentPane(panel);
         frame.repaint();
@@ -32,9 +36,8 @@ public class Gui {
 
     public  void addSearchPanel( ){
 
-            SearchForm searchForm = new SearchForm();
+        SearchForm searchForm = new SearchForm(urlList);
         JPanel panel = searchForm.getSearchPanel();
-
         frame.setContentPane(panel);
         frame.repaint();
         frame.setVisible(true);

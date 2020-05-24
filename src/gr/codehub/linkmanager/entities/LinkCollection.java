@@ -23,6 +23,7 @@ public class LinkCollection {
 //read  one by index
     public Link getLinkById(int index)
     {
+        if (index>=links.size() || index<0) return null;
         return links.get(index);
     }
 
